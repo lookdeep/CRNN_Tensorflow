@@ -239,6 +239,24 @@ class _FeatureIO(object):
         return res
 
 
+    def unpack_sparse_tensor_to_str(self, indices, values, dense_shape):
+        values = np.array([self._ord_map[str(tmp) + '_index'] for tmp in values])
+
+        number_lists = np.ones(dense_shape, dtype=values.dtype)
+        str_lists = []
+        res = []
+        for i, index in enumerate(indices):
+            number_lists[index[0], index[1]] = values[i]
+        for number_list in number_lists:
+            # Translate from ord() values into characters
+            str_lists.append([self.int_to_char(val) for val in number_list])
+        for str_list in str_lists:
+            # int_to_char() returns '\x00' for an input == 1, which is the default
+            # value in number_lists, so we skip it when building the result
+            res.append(''.join(c for c in str_list if c != '\x00'))
+        return res
+
+
 class CrnnFeatureReader(_FeatureIO):
     """
         Implement the crnn feature reader

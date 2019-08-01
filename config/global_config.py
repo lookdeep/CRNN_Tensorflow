@@ -30,11 +30,15 @@ __C.ARCH.SEQ_LENGTH = 25  # synth90k dataset
 # Width x height into which training / testing images are resized before feeding into the network
 # __C.ARCH.INPUT_SIZE = (280, 32)  # cn dataset
 __C.ARCH.INPUT_SIZE = (100, 32)  # synth90k dataset
+__C.ARCH.INPUT_SIZE = (None, 32)  # variable input size WARNING THIS CHANGES RESULTS
 # Number of channels in images
 __C.ARCH.INPUT_CHANNELS = 3
 # Number character classes
 # __C.ARCH.NUM_CLASSES = 5825  # cn dataset
+
+
 __C.ARCH.NUM_CLASSES = 37  # synth90k dataset
+#__C.ARCH.NUM_CLASSES = 69  # tyler dataset
 
 # Train options
 __C.TRAIN = edict()
@@ -83,7 +87,7 @@ __C.TRAIN.VAL_DISPLAY_STEP = 1000
 __C.TEST = edict()
 
 # Set the GPU resource used during testing process
-__C.TEST.GPU_MEMORY_FRACTION = 0.6
+__C.TEST.GPU_MEMORY_FRACTION = 0.4
 # Set the GPU allow growth parameter during tensorflow testing process
 __C.TEST.TF_ALLOW_GROWTH = False
 # Set the test batch size
