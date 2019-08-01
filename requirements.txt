@@ -1,7 +1,7 @@
 glog
 easydict
 numpy
-tensorflow_gpu
+tensorflow_gpu==1.13.1
 tqdm
 matplotlib
 typing
